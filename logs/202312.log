@@ -1,0 +1,30 @@
+INFO	2023-12-04 11:44:17,056	[logger.py:38]	hello world
+INFO	2023-12-04 11:55:12,121	[logger.py:38]	hello world
+INFO	2023-12-04 14:31:41,960	[webpage.py:32]	打开网页：https://open-t.handyprint.cn/admin
+INFO	2023-12-04 14:32:03,871	[webpage.py:32]	打开网页：https://open-t.handyprint.cn/admin
+INFO	2023-12-04 14:38:56,613	[webpage.py:32]	打开网页：https://open-t.handyprint.cn/admin
+WARNING	2023-12-04 16:01:28,508	[connectionpool.py:871]	Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000019872ED4200>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。')': /session/02f16bcabc9f632e311010b218e1c39b
+WARNING	2023-12-04 16:01:32,627	[connectionpool.py:871]	Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000198728375C0>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。')': /session/02f16bcabc9f632e311010b218e1c39b
+WARNING	2023-12-04 16:01:36,716	[connectionpool.py:871]	Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000019872ED4CE0>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。')': /session/02f16bcabc9f632e311010b218e1c39b
+INFO	2023-12-04 16:05:11,160	[webpage.py:32]	打开网页：https://open-t.handyprint.cn/admin
+INFO	2023-12-04 16:05:55,110	[webpage.py:32]	打开网页：https://www.baidu.com
+INFO	2023-12-04 16:05:55,825	[webpage.py:66]	输入文本：selenium
+INFO	2023-12-04 16:05:57,872	[webpage.py:72]	点击元素：('id', 'su')
+INFO	2023-12-04 16:05:58,036	[test_search.py:23]	<re.Match object; span=(1418, 1426), match='selenium'>
+INFO	2023-12-04 16:49:00,468	[webpage.py:32]	打开网页：https://www.baidu.com
+INFO	2023-12-04 16:59:25,470	[webpage.py:32]	打开网页：https://www.baidu.com
+INFO	2023-12-04 17:06:17,831	[webpage.py:32]	打开网页：https://www.baidu.com
+INFO	2023-12-04 17:06:37,861	[webpage.py:32]	打开网页：https://open-admin.handyprint.cn/admin
+INFO	2023-12-04 17:07:10,319	[webpage.py:32]	打开网页：https://open-admin.handyprint.cn/admin
+INFO	2023-12-04 17:07:10,971	[webpage.py:65]	输入文本：admin
+INFO	2023-12-04 17:07:11,528	[webpage.py:65]	输入文本：111111
+INFO	2023-12-04 17:07:45,987	[webpage.py:32]	打开网页：https://open-admin.handyprint.cn/admin
+INFO	2023-12-04 17:07:46,564	[webpage.py:65]	输入文本：admin
+INFO	2023-12-04 17:07:47,120	[webpage.py:65]	输入文本：111111
+INFO	2023-12-04 17:07:48,151	[webpage.py:71]	点击元素：('xpath', '//span[text()="点击按钮进行验证"]')
+INFO	2023-12-04 17:07:49,182	[webpage.py:71]	点击元素：('css', '[type="button"]')
+INFO	2023-12-04 17:08:10,567	[webpage.py:32]	打开网页：https://open-t.handyprint.cn/admin
+INFO	2023-12-04 17:08:11,137	[webpage.py:65]	输入文本：admin
+INFO	2023-12-04 17:08:11,698	[webpage.py:65]	输入文本：111111
+INFO	2023-12-04 17:08:12,729	[webpage.py:71]	点击元素：('xpath', '//span[text()="点击按钮进行验证"]')
+INFO	2023-12-04 17:08:13,763	[webpage.py:71]	点击元素：('css', '[type="button"]')

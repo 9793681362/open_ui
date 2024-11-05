@@ -1,0 +1,61 @@
+
+# ————————————————————————————————————通用元素
+
+# 输入框
+input: 'css==[class="el-input__inner"]'
+# 方形按钮
+el_checkbox__inner: 'css==[class="el-checkbox__inner"]'
+# 北京市
+beijing: 'xpath==//span[text()="北京市"]'
+# 市辖区
+shixiaqu: 'xpath==//span[text()="市辖区"]'
+# 东城区
+dongchengqu: 'xpath==//span[text()="东城区"]'
+# 东华门街道
+donghuamenjiedao: 'xpath==//span[text()="东华门街道"]'
+# 插入图片
+type_file: 'css==[type="file"]'
+# 园钮
+el_radio_inner: 'css==[class="el-radio__inner"]'
+# 提交审核
+to_examine: 'xpath==//span[text()="提交审核"]'
+# 今天
+today: 'css==[class="available today"]'
+# 确认
+confirm: 'xpath==//span[text()="确认"]'
+# 确定
+确定: 'css==[class="el-button el-button--default el-button--small el-button--primary "]'
+# search
+search: 'xpath==//span[text()="搜索"]'
+# 商品名称
+product_name: 'xpath==//span[text()="商品名称"]'
+# 备注
+remake: 'css==[class="el-textarea__inner"]'
+# 人事管理
+hr_management: 'xpath==//span[text()="人事管理"]'
+# 我的工作台
+function_not_open: 'css==[class="red-text m-t-20 m-l-20"]'
+# 保存
+save: 'xpath==//span[text()="保存"]'
+# 复制链接
+copy_link: 'xpath==//span[text()="复制链接"]'
+
+
+
+# __________________________________________页面元素
+# 供应链管理
+supply_chain_management: 'xpath==//span[text()="供应链管理"]'
+# 供应链入住
+supplier_check_in: 'xpath==//div[contains(text(),"供应商入驻")]'
+# 新增供应商
+new_vendor: 'xpath==//span[text()="新增供应商"]'
+# 选择
+choice: 'xpath==//span[text()="选择"]'
+# 1
+one: 'css==[data-value="1"]'
+# 其他信息
+other_message: 'css==[class="m-l-10 el-icon-arrow-down"]'
+# 邀请供应商
+invite_vendor: 'xpath==//span[text()="邀请供应商"]'
+# 网址
+invite_vendor_link: 'xpath==/html/body/div[1]/div/div[2]/section/div/div/div/div[3]/div/div[2]/div'

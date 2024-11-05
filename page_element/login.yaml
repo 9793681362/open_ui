@@ -1,0 +1,12 @@
+# 用户名
+username: "name==username"
+# 密码
+password: "name==password"
+# 验证按钮
+Verify_button: 'xpath==//span[text()="点击按钮进行验证"]'
+# 登录按钮
+login_link: 'css==[type="button"]'
+# 退出按钮
+quit_but: 'css==[class="el-icon-caret-bottom"]'
+# 登出
+quit: 'xpath==//span[text()="登出"]'
