@@ -217,3 +217,33 @@ new_design_order: 'xpath==//span[text()="新增设计单"]'
 choice_pic: 'css==[placeholder="请选择业务负责人"]'
 # 输入备注
 input_comment: 'css==[placeholder="请输入备注"]'
+
+
+
+
+
+#  重新启用
+
+# 全部商品
+all_product: 'xpath==//div[@data-v-08f89db5=""][contains(text(), "全部商品")]'
+单个新增商品: 'xpath==//span[text()="单个新增商品"]'
+#分类
+箱包类: 'xpath==//span[text()="箱包类"]'
+精选箱包: 'xpath==//span[text()="精选箱包"]'
+胸包: 'xpath==//span[text()="胸包"]'
+发货时间: 'css==[placeholder="请输入发货时间"]'
+产品尺寸: 'css==[placeholder="如100x100 (mm)"]'
+请输入: 'css==[placeholder="请输入"]'
+提交: 'xpath==//span[text()="提交"]'
+选择商品: 'css==[class="el-card list-item box-card is-always-shadow"]'
+生成规格: 'xpath==//span[text()="生成规格"]'
+请选择商户: 'css==[placeholder="请选择商户"]'
+上架至商户: 'xpath==//span[text()="上架至商户"]'
+请选择商品分类: 'css==[placeholder="请选择商品分类"]'
+请输入商品描述: 'css==[placeholder="请输入商品描述"]'
+未设置: 'css==[class="pointer"]'
+上架: 'xpath==//span[text()="上架"]'
+
+
+
+

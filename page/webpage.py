@@ -143,7 +143,7 @@ class WebPage(object):
         el.send_keys(image)
 
 
-
+    # 输入下拉框
     def input_drop(self,locator,value,number):
         el = self.find_elements(locator, number)
         log.info("[webpage]:正在对{}单个元素实行点击事件".format(locator))

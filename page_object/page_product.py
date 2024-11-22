@@ -3,11 +3,11 @@
 from page.webpage import WebPage, sleep
 from common.readelement import Element
 from common.readconfig import ini
+from datetime import datetime
 import random
 import time
 from page_object.page_login import Login
 element = Element('element')
-
 
 class PageProduct(WebPage):
     """项目管理"""
@@ -109,13 +109,69 @@ class PageProduct(WebPage):
 
 
 
-    def found_template(self):
-        self.is_clicks()
+    """
+    新商品上架流程 新增商品（2024/11/22）
+    """
+    def new_product_listing_process(self):
+        self.is_click(element['product_management'])
+        sleep(0.5)
+        self.is_click(element['all_product'])
+        self.is_click(element['单个新增商品'])
+        self.input_drop(element['contentInput'],'827新增供应商',0)
+        self.input_texts(element['input_goods'],'商品' + ' ' + str(self.generate_random(0, 1000))+ '  ' + datetime.now().strftime('%Y-%m-%d %H:%M:%S'),0)
+        self.is_click(element['selct_please'])
+        self.is_click(element['箱包类'])
+        self.is_click(element['精选箱包'])
+        self.is_click(element['胸包'])
+        self.inset_image(element['type_file'], 'C:/Users/admin/Desktop/Rick_blunt/open_ui/images/' + str(int(self.generate_random(1, 9))) + '.jpg', 0)
+        self.inset_image(element['type_file'], 'C:/Users/admin/Desktop/Rick_blunt/open_ui/images/' + str(int(self.generate_random(1, 9))) + '.jpg', 1)
+        self.inset_image(element['type_file'], 'C:/Users/admin/Desktop/Rick_blunt/open_ui/images/' + str(int(self.generate_random(1, 9))) + '.jpg', 2)
+        self.input_text(element['发货时间'],'7天内发货')
+        self.input_text(element['产品尺寸'],'150*300cm')
+        self.input_texts(element['请输入'],'10kg',0)
+        self.input_texts(element['请输入'],'99',1)
+        self.input_drop(element['contentInput'],'全国包邮',1)
+        self.input_texts(element['input'],'100张',11)
+        self.is_click(element['提交'])
+
+
+    """
+    新产品上架流程  上架至商户商品
+    """
+    def new_sku_to_company(self):
+        #self.is_click(element['product_management'])
+        #sleep(0.5)
+        #self.is_click(element['all_product'])
+        sleep(1)
+        self.is_click(element['选择商品'])
+        self.is_clicks(element['el_radio_inner'],0)
+        self.is_clicks(element['el_radio_inner'],5)
+        self.is_clicks(element['el_radio_inner'],9)
+        self.is_click(element['生成规格'])
+        self.is_clicks(element['el_checkbox__inner'],13)
+        self.input_drop(element['请选择商户'],'测试基础版小程序商户',0)
+        self.is_click(element['上架至商户'])
 
 
 
 
-
+    """
+    新商品上架流程  所属商品详情页
+    """
+    def product_details(self):
+        sleep(2)
+        self.is_click(element['请选择商品分类'])
+        self.is_clicks(element['el_checkbox__inner'],0)
+        self.input_text(element['请输入商品描述'],'此处为商品描述')
+        self.inset_image(element['type_file'], 'C:/Users/admin/Desktop/Rick_blunt/open_ui/images/' + str(
+            int(self.generate_random(1, 9))) + '.jpg', 3)
+        self.input_texts(element['input'],'10',2)
+        self.is_click(element['未设置'])
+        self.is_clicks(element['el_checkbox__inner'],0)
+        self.is_clicks(element['el_checkbox__inner'],1)
+        self.is_clicks(element['confirm'],1)
+        self.is_click(element['上架'])
+        self.is_click(element['提交'])
 
 
 

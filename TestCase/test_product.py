@@ -66,9 +66,17 @@ class TestProduct:
             #     print(f"Test case failed: {str(e)}")
             #     continue  # 跳过当前用例，执行下一个用例
 
-
-
-
+    """
+    新产品上架流程
+    """
+    def test_004(self, drivers, setup_product_url):
+        setup_product_url.get_url(ini.url)
+        Login(drivers).login("admin", "111111")
+        for i in range(10):
+            setup_product_url.new_product_listing_process()
+            setup_product_url.new_sku_to_company()
+            setup_product_url.product_details()
+            sleep(1)
 
 if __name__ == '__main__':
     pytest.main(['TestCase/test_product.py'])
