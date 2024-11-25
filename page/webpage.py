@@ -16,8 +16,9 @@ from utils.logger import log
 import random
 import time
 
-
 vendor = Element('vendor')
+element = Element('element')
+
 
 class WebPage(object):
     """selenium基类"""
@@ -50,7 +51,7 @@ class WebPage(object):
         return WebPage.element_locator(lambda *args: self.wait.until(
             EC.presence_of_element_located(args)), locator)
 
-    def find_elements(self,locator,number):
+    def find_elements(self, locator, number):
         """查找多个相同的元素"""
         return WebPage.element_locator(lambda *args: self.wait.until(
             EC.presence_of_all_elements_located(args)), locator)[number]
@@ -69,8 +70,8 @@ class WebPage(object):
         log.info("输入文本：{}".format(txt))
 
     # 输入多个元素
-    def input_texts(self,locator,txt,number):
-        ele = self.find_elements(locator,number)
+    def input_texts(self, locator, txt, number):
+        ele = self.find_elements(locator, number)
         ele.clear()
         ele.send_keys(txt)
         log.info("输入文本：{}".format(txt))
@@ -81,9 +82,9 @@ class WebPage(object):
         sleep()
         log.info("点击元素：{}".format(locator))
 
-    def is_clicks(self, locator,number):
+    def is_clicks(self, locator, number):
         """点击"""
-        self.find_elements(locator,number).click()
+        self.find_elements(locator, number).click()
         sleep()
         log.info("点击元素：{}".format(locator))
 
@@ -93,9 +94,9 @@ class WebPage(object):
         log.info("获取文本：{}".format(_text))
         return _text
 
-    def element_texts(self, locator,number):
+    def element_texts(self, locator, number):
         """获取当前的text"""
-        _text = self.find_elements(locator,number).text
+        _text = self.find_elements(locator, number).text
         log.info("获取文本：{}".format(_text))
         return _text
 
@@ -109,10 +110,9 @@ class WebPage(object):
         self.driver.refresh()
         self.driver.implicitly_wait(30)
 
-
     # 多元素 点击 下拉框
-    def click_drop_n(self,locator,circulate,number):
-        el = self.find_elements(locator,number)
+    def click_drop_n(self, locator, circulate, number):
+        el = self.find_elements(locator, number)
         el.click()
         i = 0
         while i <= circulate:
@@ -123,11 +123,10 @@ class WebPage(object):
         log.info("[webpage]:正在对{}多个元素实行回车操作".format(locator))
         el.send_keys(Keys.ENTER)
 
-
     # 选择输入框内收货地址
-    def select_address(self,locator,number):
+    def select_address(self, locator, number):
         """"选择输入框内收货地址"""
-        el = self.find_elements(locator,number)
+        el = self.find_elements(locator, number)
         el.click()
         log.info("正在选择地址")
         self.find_element(Element('vendor')['beijing']).click()
@@ -135,20 +134,18 @@ class WebPage(object):
         self.find_element(Element('vendor')['dongchengqu']).click()
         self.find_element(Element('vendor')['donghuamenjiedao']).click()
 
-
-    def inset_image(self,locator,image,number):
+    def inset_image(self, locator, image, number):
         """插入图片"""
-        el = self.find_elements(locator,number)
-        log.info("[base]:正在对{}多个元素插入图片，图片为{}".format(locator,number))
+        el = self.find_elements(locator, number)
+        log.info("[base]:正在对{}多个元素插入图片，图片为{}".format(locator, number))
         el.send_keys(image)
 
-
     # 输入下拉框
-    def input_drop(self,locator,value,number):
+    def input_drop(self, locator, value, number):
         el = self.find_elements(locator, number)
         log.info("[webpage]:正在对{}单个元素实行点击事件".format(locator))
         el.click()
-        sleep(0.5)
+        sleep(1)
         log.info("[webpage]:正在对{}单个元素实行清空操作".format(locator))
         el.clear()
         log.info("[webpage]:正在对{}单个元素输入操作,输入的值为{}".format(locator, value))
@@ -159,54 +156,64 @@ class WebPage(object):
         log.info("[webpage]:正在对{}单个元素进行回车操作".format(locator))
         el.send_keys(Keys.ENTER)
 
-
-
-    def select_data(self,locator,number):
+    def select_data(self, locator, number):
         """选择日期今天"""
-        el = self.find_elements(locator,number)
+        el = self.find_elements(locator, number)
         el.click()
         sleep(0.5)
-        ls = self.find_elements(Element('project')['today'],0)
+        ls = self.find_elements(Element('project')['today'], 0)
         ls.click()
 
-
-    def generate_random(self,start, end):
+    def generate_random(self, start, end):
         "随机数，不包含小数点"
         random_number = random.randint(start, end)
         return random_number
 
-    def generate_random_even(self,start, end):
+    def generate_random_even(self, start, end):
         random_number = random.randint(start, end)
         # 将随机数调整为偶数
         return random_number if random_number % 2 == 0 else random_number + 1
 
-    def generate_random_odd(self,start, end):
+    def generate_random_odd(self, start, end):
         random_number = random.randint(start, end)
         # 将随机数调整为奇数
         return random_number if random_number % 2 != 0 else random_number + 1
 
-    def generate_random_float(self,start, end):
+    def generate_random_float(self, start, end):
         if not isinstance(start, (int, float)) or not isinstance(end, (int, float)):
             raise ValueError("Both start and end must be numbers")
         # 生成范围内保留两位小数的随机浮点数
         random_float = round(random.uniform(start, end), 2)
         return random_float
 
-    def generate_random_chinese(self,num_chars):
+    def generate_random_chinese(self, num_chars):
         chinese_chars = ''
         for _ in range(num_chars):
             chinese_char = chr(random.randint(0x4e00, 0x9fa5))
             chinese_chars += chinese_char
         return chinese_chars
 
-    def mouse_hover(self,locator,number):
-        el = self.find_elements(locator,number)
+    def mouse_hover(self, locator, number):
+        el = self.find_elements(locator, number)
         actions = ActionChains(self.driver)
         actions.move_to_element(el).perform()
 
-
-    def choose_page(self,locator,start,end):
+    def choose_page(self, locator, start, end):
         el = self.find_element(locator)
         el.clear()
-        el.send_keys(self.generate_random(start,end))
+        el.send_keys(self.generate_random(start, end))
         el.send_keys(Keys.ENTER)
+
+    # 点击小园钮
+    def batch_click_actions(self, click_groups, action_element):
+        """
+        批量对一组元素执行点击操作，并在每组操作后点击指定动作元素。
+        :param element:
+        :param click_groups:
+        :param action_element:
+        :return:
+        """
+        for group in click_groups:
+            for index in group:
+                self.is_clicks(element['el_radio_inner'], index)
+            self.is_click(action_element)

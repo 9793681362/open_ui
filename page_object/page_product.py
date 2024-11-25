@@ -8,10 +8,11 @@ import random
 import time
 from page_object.page_login import Login
 element = Element('element')
-
+click_groups = [[0, 5, 10], [1, 6, 11], [2, 7, 12], [3, 8, 13], [4, 9, 14]]
 class PageProduct(WebPage):
     """项目管理"""
     project_number = None
+
 
     def new_proposal(self, company):
         """新增提案"""
@@ -114,7 +115,7 @@ class PageProduct(WebPage):
     """
     def new_product_listing_process(self):
         self.is_click(element['product_management'])
-        sleep(0.5)
+        sleep(1)
         self.is_click(element['all_product'])
         self.is_click(element['单个新增商品'])
         self.input_drop(element['contentInput'],'827新增供应商',0)
@@ -123,37 +124,46 @@ class PageProduct(WebPage):
         self.is_click(element['箱包类'])
         self.is_click(element['精选箱包'])
         self.is_click(element['胸包'])
-        self.inset_image(element['type_file'], 'C:/Users/admin/Desktop/Rick_blunt/open_ui/images/' + str(int(self.generate_random(1, 9))) + '.jpg', 0)
-        self.inset_image(element['type_file'], 'C:/Users/admin/Desktop/Rick_blunt/open_ui/images/' + str(int(self.generate_random(1, 9))) + '.jpg', 1)
-        self.inset_image(element['type_file'], 'C:/Users/admin/Desktop/Rick_blunt/open_ui/images/' + str(int(self.generate_random(1, 9))) + '.jpg', 2)
+        self.inset_image(element['type_file'], 'C:/Users/admin/Desktop/Rick_blunt/open_ui/images/' + str(
+            int(self.generate_random(1, 100))) + '.jpg', 0)
+        self.inset_image(element['type_file'], 'C:/Users/admin/Desktop/Rick_blunt/open_ui/images/' + str(
+            int(self.generate_random(1, 100))) + '.jpg', 1)
+        self.inset_image(element['type_file'], 'C:/Users/admin/Desktop/Rick_blunt/open_ui/images/' + str(
+            int(self.generate_random(1, 100))) + '.jpg', 2)
         self.input_text(element['发货时间'],'7天内发货')
         self.input_text(element['产品尺寸'],'150*300cm')
         self.input_texts(element['请输入'],'10kg',0)
         self.input_texts(element['请输入'],'99',1)
         self.input_drop(element['contentInput'],'全国包邮',1)
         self.input_texts(element['input'],'100张',11)
-        self.is_click(element['提交'])
 
+        self.is_click(element['提交'])
 
     """
     新产品上架流程  上架至商户商品
     """
     def new_sku_to_company(self):
-        #self.is_click(element['product_management'])
-        #sleep(0.5)
-        #self.is_click(element['all_product'])
+        # self.is_click(element['product_management'])
+        # sleep(0.5)
+        # self.is_click(element['all_product'])
         sleep(1)
         self.is_click(element['选择商品'])
-        self.is_clicks(element['el_radio_inner'],0)
-        self.is_clicks(element['el_radio_inner'],5)
-        self.is_clicks(element['el_radio_inner'],9)
-        self.is_click(element['生成规格'])
-        self.is_clicks(element['el_checkbox__inner'],13)
+        click_groups = [[0, 5, 10], [1, 6, 11],[2,7,12],[3,8,13],[4,9,14]]
+        self.batch_click_actions(click_groups,element['生成规格'])
+        self.is_clicks(element['el_checkbox__inner'],12)
+        for i in range(len(click_groups)):
+            self.is_clicks(element['编辑参数'],i)
+            self.input_text(element['发货时间'],'10天内发货')
+            self.input_text(element['产品尺寸'],'100*100cm')
+            self.input_texts(element['请输入'],'500g',0)
+            self.input_texts(element['请输入'],'1000',1)
+            self.input_drop(element['contentInput'],'全国包邮',0)
+            self.click_drop_n(element['selct_please'],2,3)
+            self.click_drop_n(element['selct_please'],1,4)
+            self.click_drop_n(element['selct_please'],1,5)
+            self.is_click(element['确定按钮'])
         self.input_drop(element['请选择商户'],'测试基础版小程序商户',0)
         self.is_click(element['上架至商户'])
-
-
-
 
     """
     新商品上架流程  所属商品详情页
@@ -163,14 +173,28 @@ class PageProduct(WebPage):
         self.is_click(element['请选择商品分类'])
         self.is_clicks(element['el_checkbox__inner'],0)
         self.input_text(element['请输入商品描述'],'此处为商品描述')
-        self.inset_image(element['type_file'], 'C:/Users/admin/Desktop/Rick_blunt/open_ui/images/' + str(
-            int(self.generate_random(1, 9))) + '.jpg', 3)
-        self.input_texts(element['input'],'10',2)
-        self.is_click(element['未设置'])
-        self.is_clicks(element['el_checkbox__inner'],0)
-        self.is_clicks(element['el_checkbox__inner'],1)
-        self.is_clicks(element['confirm'],1)
-        self.is_click(element['上架'])
+        current_value = 4  # 初始化为0
+        s = 4
+        for i in range(len(click_groups)):
+            # 在每次循环中插入图片
+            self.inset_image(
+                element['type_file'],
+                'C:/Users/admin/Desktop/Rick_blunt/open_ui/images/' + str(int(self.generate_random(1, 100))) + '.jpg',
+                i + 3
+            )
+            if i == 0:  # 第一次不加偏移
+                self.input_texts(element['input'], '10', 2)
+                self.is_clicks(element['未设置'], 0)
+            else:  # 第二次及之后
+                self.input_texts(element['input'], '10', s)
+                self.is_clicks(element['未设置'], current_value)
+                s += 2
+                current_value += 4  # 每次迭代后累加4
+
+            self.is_clicks(element['el_checkbox__inner'],0)
+            self.is_clicks(element['el_checkbox__inner'],1)
+            self.is_clicks(element['confirm'],1)
+            self.is_click(element['上架'])
         self.is_click(element['提交'])
 
 

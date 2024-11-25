@@ -243,7 +243,8 @@ all_product: 'xpath==//div[@data-v-08f89db5=""][contains(text(), "全部商品")
 请输入商品描述: 'css==[placeholder="请输入商品描述"]'
 未设置: 'css==[class="pointer"]'
 上架: 'xpath==//span[text()="上架"]'
-
+编辑参数: 'xpath==//span[text()="编辑参数"]'
+确定按钮: 'xpath==//span[text()="确定"]'
 
 
 
