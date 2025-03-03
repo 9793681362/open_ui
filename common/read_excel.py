@@ -20,6 +20,7 @@ def load_test_cases_from_excel(file_path, sheet_name):
 
 # 使用示例
 excel_file_path = '../data/excel/test_case.xlsx'
+path_2 = '../../data/excel/test_case.xlsx'
 sheet_name = '项目下单'
 
 test_cases = load_test_cases_from_excel(excel_file_path, sheet_name)

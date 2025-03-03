@@ -102,6 +102,7 @@ new_order: 'xpath==//span[text()="创建订单"]'
 select_goods: 'xpath==//span[text()="选择商品"]'
 # 供应链管理
 supply_chain: 'xpath==//span[text()="供应链管理"]'
+设计需求: 'css==a[href="/admin/project/designer/demand"]'
 # 自定义商品
 customs_goods: 'xpath==//span[text()="自定义商品"]'
 # 去审核
@@ -247,4 +248,27 @@ all_product: 'xpath==//div[@data-v-08f89db5=""][contains(text(), "全部商品")
 确定按钮: 'xpath==//span[text()="确定"]'
 
 
+# 批量导入
+自定义规格名称: 'xpath==//span[text()="自定义规格名称"]'
+批量新增商品: 'xpath==//span[text()="批量新增商品"]'
+下一步: 'xpath==//span[text()="下一步"]'
 
+
+
+# 商户下单列表
+商户下单列表: "xpath==//a[@href='/admin/company/order/offline' and contains(@class, 'app-link')]//div[text()=' 商户下单列表 ']"
+
+
+# 设计
+新增设计需求: 'xpath==//span[text()="新增设计需求"]'
+请输入项目编码: 'css==[placeholder="请输入项目编码"]'
+
+
+
+#rpa
+other: "xpath==//span[text()='其他']"
+其他: 'xpath==/html/body/div[1]/div/div[1]/div/div[1]/div/ul/div[15]/li/div'
+new_order_details: 'xpath==//span[text()="构造新订单"]'
+请输入采购申请人: 'css==[placeholder="请输入采购申请人"]'
+添加商品: 'xpath==//span[text()="添加商品"]'
+构造订单: "xpath==//a[contains(@class, 'app-link') and contains(., '构造订单')]"

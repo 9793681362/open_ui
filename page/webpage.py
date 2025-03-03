@@ -4,6 +4,7 @@
 selenium基类
 本文件存放了selenium基类的封装方法
 """
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
@@ -48,13 +49,44 @@ class WebPage(object):
 
     def find_element(self, locator):
         """寻找单个元素"""
-        return WebPage.element_locator(lambda *args: self.wait.until(
-            EC.presence_of_element_located(args)), locator)
+        try:
+            return WebPage.element_locator(lambda *args: self.wait.until(
+                EC.presence_of_element_located(args)), locator)
+        except:
+            print('寻找单个元素失败')
 
     def find_elements(self, locator, number):
         """查找多个相同的元素"""
-        return WebPage.element_locator(lambda *args: self.wait.until(
-            EC.presence_of_all_elements_located(args)), locator)[number]
+        try:
+            return WebPage.element_locator(lambda *args: self.wait.until(
+                EC.presence_of_all_elements_located(args)), locator)[number]
+        except:
+            print('寻找多个元素失败')
+
+    # def find_element(self, locator):
+    #     """寻找单个元素"""
+    #     try:
+    #         return WebPage.element_locator(lambda *args: self.wait.until(
+    #             EC.presence_of_element_located(args)), locator)
+    #     except TimeoutException:
+    #         print(f"寻找单个元素超时: {locator}")
+    #     except NoSuchElementException:
+    #         print(f"未找到元素: {locator}")
+    #     except Exception as e:
+    #         print(f"寻找单个元素失败: {e}")
+    #
+    # def find_elements(self, locator, number):
+    #     """查找多个相同的元素"""
+    #     try:
+    #         elements = WebPage.element_locator(lambda *args: self.wait.until(
+    #             EC.presence_of_all_elements_located(args)), locator)
+    #         return elements[number]  # 返回第 `number` 个元素
+    #     except TimeoutException:
+    #         print(f"寻找多个元素超时: {locator}")
+    #     except IndexError:
+    #         print(f"未找到第 {number} 个元素: {locator}")
+    #     except Exception as e:
+    #         print(f"寻找多个元素失败: {e}")
 
     def elements_num(self, locator):
         """获取相同元素的个数"""

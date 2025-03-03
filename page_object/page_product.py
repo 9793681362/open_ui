@@ -136,7 +136,6 @@ class PageProduct(WebPage):
         self.input_texts(element['请输入'],'99',1)
         self.input_drop(element['contentInput'],'全国包邮',1)
         self.input_texts(element['input'],'100张',11)
-
         self.is_click(element['提交'])
 
     """
@@ -166,7 +165,7 @@ class PageProduct(WebPage):
         self.is_click(element['上架至商户'])
 
     """
-    新商品上架流程  所属商品详情页
+    新商品上架流程  所属商品详情页（选择品类）
     """
     def product_details(self):
         sleep(2)
@@ -203,11 +202,53 @@ class PageProduct(WebPage):
 
 
 
+    """
+    新商品上架流程  所属商品详情页（自定义规格）
+    """
+    def product_details_sku(self):
+        sleep(2)
+        self.is_click(element['请选择商品分类'])
+        self.is_clicks(element['el_checkbox__inner'],0)
+        self.input_text(element['请输入商品描述'],'此处为商品描述')
+        self.is_click(element['自定义规格名称'])
+        current_value = 4  # 初始化为0
+        s = 2
+        d = 3
+        for i in range(len(click_groups)):
+            # 在每次循环中插入图片
+            self.inset_image(
+                element['type_file'],
+                'C:/Users/admin/Desktop/Rick_blunt/open_ui/images/' + str(int(self.generate_random(1, 100))) + '.jpg',
+                i + 3
+            )
+            if i == 0:  # 第一次不加偏移
+                self.input_drop(element['selct_please'], '规格名称1', 0)
+                self.input_drop(element['selct_please'], '规格名称2', 1)
+                self.is_clicks(element['未设置'], 0)
+            else:  # 第二次及之后
+                self.input_drop(element['selct_please'], '规格名称1', s)
+                self.input_drop(element['selct_please'], '规格名称2', d)
+                self.is_clicks(element['未设置'], current_value)
+                s += 2
+                d += 2
+                current_value += 4  # 每次迭代后累加4
+            self.is_clicks(element['el_checkbox__inner'],0)
+            self.is_clicks(element['el_checkbox__inner'],1)
+            self.is_clicks(element['confirm'],1)
+            self.is_click(element['上架'])
+        self.is_click(element['提交'])
 
 
 
-
-
+    def batch_create_goods(self):
+        self.is_click(element['product_management'])
+        sleep(0.5)
+        self.is_click(element['all_product'])
+        sleep(1)
+        self.is_click(element['批量新增商品'])
+        self.inset_image(element['type_file'], 'C:/Users/admin/Desktop/导入功能/新商品库导入/商品导入.xlsx', 0)
+        self.inset_image(element['type_file'], 'C:/Users/admin/Desktop/导入功能/新商品库导入/新商品库导入.zip', 1)
+        self.is_click(element['下一步'])
 
 
 

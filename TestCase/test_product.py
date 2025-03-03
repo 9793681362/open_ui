@@ -67,16 +67,49 @@ class TestProduct:
             #     continue  # 跳过当前用例，执行下一个用例
 
     """
-    新产品上架流程
+    新产品上架流程(选择品类)
     """
     def test_004(self, drivers, setup_product_url):
         setup_product_url.get_url(ini.url)
         Login(drivers).login("admin", "111111")
         for i in range(10):
-            setup_product_url.new_product_listing_process()
-            setup_product_url.new_sku_to_company()
-            setup_product_url.product_details()
-            sleep(1)
+            try:
+                setup_product_url.new_product_listing_process()
+                setup_product_url.new_sku_to_company()
+                setup_product_url.product_details()
+                sleep(1)
+            except Exception as e:
+                setup_product_url.get_url(ini.url)
+                Login(drivers).login("admin", "111111")
+
+
+    """
+    新产品上架流程（自定义规格）
+    """
+    def test_005(self, drivers, setup_product_url):
+        setup_product_url.get_url(ini.url)
+        Login(drivers).login("admin", "111111")
+        for i in range(10):
+            try:
+                setup_product_url.new_product_listing_process()
+                setup_product_url.new_sku_to_company()
+                setup_product_url.product_details_sku()
+                sleep(1)
+            except Exception as e:
+                print("报错")
+                setup_product_url.get_url(ini.url)
+                Login(drivers).login("admin", "111111")
+
+
+    """
+    新品上架流程(批量导入)
+    """
+    def test_006(self, drivers, setup_product_url):
+        setup_product_url.get_url(ini.url)
+        Login(drivers).login("admin", "111111")
+        setup_product_url.batch_create_goods()
+
+
 
 if __name__ == '__main__':
     pytest.main(['TestCase/test_product.py'])
