@@ -92,6 +92,11 @@ class TestProject:
                 print(f"Test case failed: {str(e)}")
                 continue  # 跳过当前用例，执行下一个用例
 
+
+
+
+
+
 if __name__ == '__main__':
     pytest.main(['TestCase/test_project.py'])
 

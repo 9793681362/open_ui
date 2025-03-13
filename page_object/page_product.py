@@ -118,17 +118,18 @@ class PageProduct(WebPage):
         sleep(1)
         self.is_click(element['all_product'])
         self.is_click(element['单个新增商品'])
+        self.wait_for_overlay_to_disappear() # 等待遮罩
         self.input_drop(element['contentInput'],'827新增供应商',0)
         self.input_texts(element['input_goods'],'商品' + ' ' + str(self.generate_random(0, 1000))+ '  ' + datetime.now().strftime('%Y-%m-%d %H:%M:%S'),0)
         self.is_click(element['selct_please'])
         self.is_click(element['箱包类'])
-        self.is_click(element['精选箱包'])
-        self.is_click(element['胸包'])
-        self.inset_image(element['type_file'], 'C:/Users/admin/Desktop/Rick_blunt/open_ui/images/' + str(
+        self.is_click(element['功能箱包'])
+        self.is_click(element['背包双肩包'])
+        self.inset_image(element['type_file'], 'C:/Users/Administrator/Desktop/open_ui/images/' + str(
             int(self.generate_random(1, 100))) + '.jpg', 0)
-        self.inset_image(element['type_file'], 'C:/Users/admin/Desktop/Rick_blunt/open_ui/images/' + str(
+        self.inset_image(element['type_file'], 'C:/Users/Administrator/Desktop/open_ui/images/' + str(
             int(self.generate_random(1, 100))) + '.jpg', 1)
-        self.inset_image(element['type_file'], 'C:/Users/admin/Desktop/Rick_blunt/open_ui/images/' + str(
+        self.inset_image(element['type_file'], 'C:/Users/Administrator/Desktop/open_ui/images/' + str(
             int(self.generate_random(1, 100))) + '.jpg', 2)
         self.input_text(element['发货时间'],'7天内发货')
         self.input_text(element['产品尺寸'],'150*300cm')
@@ -145,17 +146,20 @@ class PageProduct(WebPage):
         # self.is_click(element['product_management'])
         # sleep(0.5)
         # self.is_click(element['all_product'])
-        sleep(1)
+        # self.wait_for_overlay_to_disappear()
+        # self.wait_for_overlay_to_disappear()
+        self.wait_for_overlay_to_disappear()
         self.is_click(element['选择商品'])
+        sleep(1)
         click_groups = [[0, 5, 10], [1, 6, 11],[2,7,12],[3,8,13],[4,9,14]]
         self.batch_click_actions(click_groups,element['生成规格'])
-        self.is_clicks(element['el_checkbox__inner'],12)
+        self.is_clicks(element['el_checkbox__inner'],11)
         for i in range(len(click_groups)):
             self.is_clicks(element['编辑参数'],i)
             self.input_text(element['发货时间'],'10天内发货')
             self.input_text(element['产品尺寸'],'100*100cm')
-            self.input_texts(element['请输入'],'500g',0)
-            self.input_texts(element['请输入'],'1000',1)
+            self.input_texts(element['请输入'],'500g',2)
+            self.input_texts(element['请输入'],'1000',3)
             self.input_drop(element['contentInput'],'全国包邮',0)
             self.click_drop_n(element['selct_please'],2,3)
             self.click_drop_n(element['selct_please'],1,4)
@@ -218,7 +222,7 @@ class PageProduct(WebPage):
             # 在每次循环中插入图片
             self.inset_image(
                 element['type_file'],
-                'C:/Users/admin/Desktop/Rick_blunt/open_ui/images/' + str(int(self.generate_random(1, 100))) + '.jpg',
+                'C:/Users/Administrator/Desktop/open_ui/images/' + str(int(self.generate_random(1, 100))) + '.jpg',
                 i + 3
             )
             if i == 0:  # 第一次不加偏移
@@ -237,7 +241,7 @@ class PageProduct(WebPage):
             self.is_clicks(element['confirm'],1)
             self.is_click(element['上架'])
         self.is_click(element['提交'])
-
+        self.wait_for_overlay_to_disappear()
 
 
     def batch_create_goods(self):

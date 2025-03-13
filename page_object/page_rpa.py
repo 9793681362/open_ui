@@ -19,7 +19,7 @@ class PageRpa(WebPage):
         :return:
         """
         self.is_click(element['others'])
-        self.is_click(element['构造订单'])
+        self.is_click(element['订单调整'])
         sleep(1)
         self.is_clicks(element['el_checkbox__inner'],1)
         self.is_click(element['new_order_details'])
