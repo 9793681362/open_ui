@@ -249,3 +249,18 @@ class WebPage(object):
             for index in group:
                 self.is_clicks(element['el_radio_inner'], index)
             self.is_click(action_element)
+
+
+    # 选择时间
+    def choose_time(self,locator,number,locator2,number2):
+        el = self.find_elements(locator,number)
+        el.click()
+        sleep(0.5)
+        ls = self.find_elements(locator2,number2)
+        ls.click()
+
+    # 连续点击操作
+    def click_for(self, *xpaths):
+        for locator in xpaths:
+            el = self.find_element(locator)
+            el.click()

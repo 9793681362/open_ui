@@ -262,6 +262,22 @@ all_product: 'xpath==//div[@data-v-08f89db5=""][contains(text(), "全部商品")
 # 设计
 新增设计需求: 'xpath==//span[text()="新增设计需求"]'
 请输入项目编码: 'css==[placeholder="请输入项目编码"]'
+初稿截止时间: 'css==[placeholder="请选择初稿截止时间"]'
+终稿截止时间: 'css==[placeholder="请选择终稿截止时间"]'
+今天: 'css==[class="available today"]'
+选择日期确定: 'css==[class="el-button el-picker-panel__link-btn el-button--default el-button--mini is-plain"]'
+请选择设计内容: 'css==[placeholder="请选择设计内容"]'
+印刷物料: 'xpath==//span[text()="印刷物料"]'
+海报: 'xpath==//span[text()="海报"]'
+请选择设计师类型: 'css==[placeholder="请选择设计师类型"]'
+骚客门: 'xpath==//span[text()="【低】实习生、骚客门"]'
++: 'css==[class="el-icon-plus"]'
+默认: 'xpath==//span[text()="默认"]'
+风格: 'xpath==/html/body/div[1]/div/div[2]/section/div/div[1]/div[2]/form/div[18]/div/div[1]/input'
+色系: 'xpath==/html/body/div[1]/div/div[2]/section/div/div[1]/div[2]/form/div[19]/div/div/input'
+JPG: 'xpath==//span[text()="JPG"]'
+请输入设计要求: 'css==[placeholder="请输入设计要求"]'
+设计确认: 'css==[class="el-button button m-l-80 el-button--primary el-button--medium"]'
 
 
 
