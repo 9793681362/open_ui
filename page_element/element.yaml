@@ -226,7 +226,7 @@ input_comment: 'css==[placeholder="请输入备注"]'
 #  重新启用
 
 # 全部商品
-all_product: 'xpath==//div[@data-v-08f89db5=""][contains(text(), "全部商品")]'
+all_product: 'xpath==//a[contains(@class, "app-link") and contains(@href, "/admin/sku2/index")]'
 单个新增商品: 'xpath==//span[text()="单个新增商品"]'
 #分类
 箱包类: 'xpath==//span[text()="箱包类"]'

@@ -4,8 +4,8 @@
 selenium基类
 本文件存放了selenium基类的封装方法
 """
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
@@ -48,20 +48,58 @@ class WebPage(object):
         return func(cm.LOCATE_MODE[name], value)
 
     def find_element(self, locator):
-        """寻找单个元素"""
+        """寻找单个元素，并确保可点击"""
         try:
             return WebPage.element_locator(lambda *args: self.wait.until(
                 EC.presence_of_element_located(args)), locator)
-        except:
-            print('寻找单个元素失败')
+        except TimeoutException:
+            log.error(f"元素 {locator} 查找失败，可能被遮挡或不存在")
+            return None
 
-    def find_elements(self, locator, number):
-        """查找多个相同的元素"""
+    def wait_for_overlay_to_disappear(self, timeout=10):
+        """确保遮罩层消失，等到遮罩层完全不可见"""
         try:
-            return WebPage.element_locator(lambda *args: self.wait.until(
-                EC.presence_of_all_elements_located(args)), locator)[number]
-        except:
-            print('寻找多个元素失败')
+            print("遮罩层开始消失")
+            # 等待遮罩层消失，并确保页面稳定
+            WebDriverWait(self.driver, timeout).until(
+                lambda driver: self.is_overlay_invisible() and self.is_page_stable()
+            )
+            print("遮罩层已成功消失")
+        except Exception as e:
+            print(f"警告：遮罩层未能成功消失，可能影响操作。错误：{e}")
+
+    def wait_for_overlay_to_disappear(self, timeout=10):
+        """等待遮罩层消失后，立即执行后续代码"""
+        try:
+            print("等待遮罩层消失...")
+            WebDriverWait(self.driver, timeout).until(
+                lambda driver: self.is_overlay_invisible()
+            )
+            print("遮罩层已消失，继续执行后续代码")
+            # 在这里加入后续代码
+        except Exception as e:
+            print(f"警告：遮罩层未能在指定时间内消失。错误：{e}")
+
+    def is_overlay_invisible(self):
+        """检查遮罩层是否完全不可见"""
+        try:
+            overlay = self.driver.find_element(By.CLASS_NAME, "el-loading-mask")
+            display = overlay.value_of_css_property("display")
+            visibility = overlay.value_of_css_property("visibility")
+            opacity = overlay.value_of_css_property("opacity")
+            print(f"遮罩层属性：display={display}, visibility={visibility}, opacity={opacity}")
+            return display == "none" or visibility == "hidden" or opacity == "0"
+        except Exception as e:
+            print(f"找不到遮罩层元素：{e}")
+            return True  # 如果元素不存在，则认为遮罩层已消失
+
+    # def find_elements(self, locator, number):
+    #     """查找多个相同的元素"""
+    #     try:
+    #         return WebPage.element_locator(lambda *args: self.wait.until(
+    #             EC.presence_of_element_located(args)), locator)[number]
+    #     except:
+    #         print('寻找多个元素失败')
 
     # def find_element(self, locator):
     #     """寻找单个元素"""
@@ -75,18 +113,18 @@ class WebPage(object):
     #     except Exception as e:
     #         print(f"寻找单个元素失败: {e}")
     #
-    # def find_elements(self, locator, number):
-    #     """查找多个相同的元素"""
-    #     try:
-    #         elements = WebPage.element_locator(lambda *args: self.wait.until(
-    #             EC.presence_of_all_elements_located(args)), locator)
-    #         return elements[number]  # 返回第 `number` 个元素
-    #     except TimeoutException:
-    #         print(f"寻找多个元素超时: {locator}")
-    #     except IndexError:
-    #         print(f"未找到第 {number} 个元素: {locator}")
-    #     except Exception as e:
-    #         print(f"寻找多个元素失败: {e}")
+    def find_elements(self, locator, number):
+        """查找多个相同的元素"""
+        try:
+            elements = WebPage.element_locator(lambda *args: self.wait.until(
+                EC.presence_of_all_elements_located(args)), locator)
+            return elements[number]  # 返回第 `number` 个元素
+        except TimeoutException:
+            print(f"寻找多个元素超时: {locator}")
+        except IndexError:
+            print(f"未找到第 {number} 个元素: {locator}")
+        except Exception as e:
+            print(f"寻找多个元素失败: {e}")
 
     def elements_num(self, locator):
         """获取相同元素的个数"""
@@ -172,7 +210,7 @@ class WebPage(object):
         log.info("[base]:正在对{}多个元素插入图片，图片为{}".format(locator, number))
         el.send_keys(image)
 
-    # 输入下拉框
+    #输入下拉框
     def input_drop(self, locator, value, number):
         el = self.find_elements(locator, number)
         log.info("[webpage]:正在对{}单个元素实行点击事件".format(locator))
@@ -187,6 +225,8 @@ class WebPage(object):
         el.send_keys(Keys.DOWN)
         log.info("[webpage]:正在对{}单个元素进行回车操作".format(locator))
         el.send_keys(Keys.ENTER)
+
+
 
     def select_data(self, locator, number):
         """选择日期今天"""
@@ -251,16 +291,58 @@ class WebPage(object):
             self.is_click(action_element)
 
 
-    # 选择时间
-    def choose_time(self,locator,number,locator2,number2):
-        el = self.find_elements(locator,number)
-        el.click()
-        sleep(0.5)
-        ls = self.find_elements(locator2,number2)
-        ls.click()
+    # 点击后输入
+    def click_input(self, locator, txt):
+        try:
+            el = self.find_element(locator)
+            # 点击元素
+            el.click()
+            # 输入文本
+            ActionChains(self.driver).send_keys(txt).perform() # ActionChains 可以向当前获得焦点的元素发送按键。
+        except Exception as e:
+            print(f"Error: {e}")
 
-    # 连续点击操作
-    def click_for(self, *xpaths):
-        for locator in xpaths:
+    # def input_dorp_click(self,locator,locator1,locator2):
+    #     el = self.find_element(locator)
+    #     el.click()
+    #     ls = self.find_element(locator1)
+    #     ls.click()
+    #     lm = self.find_element(locator2)
+    #     lm.click()
+
+    def input_dorp_click(self, *locators):
+        """
+        传入多个定位器，依次查找并点击每个元素。
+        参数：
+          locators: 多个定位器，可以是元组，例如 ("xpath", "//span[text()='添加']")
+        """
+        for locator in locators:
             el = self.find_element(locator)
             el.click()
+
+
+
+    def input_dorp_clicks(self, *locators,number):
+        """
+        传入多个定位器，依次查找并点击每个元素。
+        参数：
+          locators: 多个定位器，可以是元组，例如 ("xpath", "//span[text()='添加']")
+        """
+        for locator in locators:
+            el = self.find_elements(locator,number)
+            el.click()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

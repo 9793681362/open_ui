@@ -119,25 +119,25 @@ class PageProduct(WebPage):
         self.is_click(element['all_product'])
         self.is_click(element['单个新增商品'])
         self.wait_for_overlay_to_disappear() # 等待遮罩
-        self.input_drop(element['contentInput'],'827新增供应商',0)
-        self.input_texts(element['input_goods'],'商品' + ' ' + str(self.generate_random(0, 1000))+ '  ' + datetime.now().strftime('%Y-%m-%d %H:%M:%S'),0)
-        self.is_click(element['selct_please'])
-        self.is_click(element['箱包类'])
-        self.is_click(element['功能箱包'])
-        self.is_click(element['背包双肩包'])
-        self.inset_image(element['type_file'], 'C:/Users/Administrator/Desktop/open_ui/images/' + str(
-            int(self.generate_random(1, 100))) + '.jpg', 0)
-        self.inset_image(element['type_file'], 'C:/Users/Administrator/Desktop/open_ui/images/' + str(
-            int(self.generate_random(1, 100))) + '.jpg', 1)
-        self.inset_image(element['type_file'], 'C:/Users/Administrator/Desktop/open_ui/images/' + str(
-            int(self.generate_random(1, 100))) + '.jpg', 2)
-        self.input_text(element['发货时间'],'7天内发货')
-        self.input_text(element['产品尺寸'],'150*300cm')
-        self.input_texts(element['请输入'],'10kg',0)
-        self.input_texts(element['请输入'],'99',1)
-        self.input_drop(element['contentInput'],'全国包邮',1)
-        self.input_texts(element['input'],'100张',11)
-        self.is_click(element['提交'])
+        self.input_drop(element['contentInput'],'上海雅滔文化传播有限公司（测试）',0)
+        # self.input_texts(element['input_goods'],'商品' + ' ' + str(self.generate_random(0, 1000))+ '  ' + datetime.now().strftime('%Y-%m-%d %H:%M:%S'),0)
+        # self.is_click(element['selct_please'])
+        # self.is_click(element['箱包类'])
+        # self.is_click(element['功能箱包'])
+        # self.is_click(element['背包双肩包'])
+        # self.inset_image(element['type_file'], 'C:/Users/Administrator/Desktop/open_ui/images/' + str(
+        #     int(self.generate_random(1, 100))) + '.jpg', 0)
+        # self.inset_image(element['type_file'], 'C:/Users/Administrator/Desktop/open_ui/images/' + str(
+        #     int(self.generate_random(1, 100))) + '.jpg', 1)
+        # self.inset_image(element['type_file'], 'C:/Users/Administrator/Desktop/open_ui/images/' + str(
+        #     int(self.generate_random(1, 100))) + '.jpg', 2)
+        # self.input_text(element['发货时间'],'7天内发货')
+        # self.input_text(element['产品尺寸'],'150*300cm')
+        # self.input_texts(element['请输入'],'10kg',0)
+        # self.input_texts(element['请输入'],'99',1)
+        # self.input_drop(element['contentInput'],'全国包邮',1)
+        # self.input_texts(element['input'],'100张',11)
+        # self.is_click(element['提交'])
 
     """
     新产品上架流程  上架至商户商品
