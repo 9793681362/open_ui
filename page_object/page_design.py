@@ -46,10 +46,6 @@ class PageDesign(WebPage):
         self.input_text(element['请输入设计要求'],'请输入设计要求')
         self.input_text(element['input_comment'],'请输入备注')
         self.is_click(element['设计确认'])
-
-
-
-
         sleep(1000)
 
 

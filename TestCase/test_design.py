@@ -25,3 +25,6 @@ class TestDesign:
         setup_product_url.get_url(ini.url)
         Login(drivers).login("bd", "a111111")
         setup_product_url.new_design()
+
+
+

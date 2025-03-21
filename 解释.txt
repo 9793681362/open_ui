@@ -1,0 +1,9 @@
+商品管理 → Product Management
+客户管理 → Customer Management
+销售管理 → Sales Management
+订单管理 → Order Management
+供应链管理 → Supply Chain Management
+财务管理 → Financial Management
+人事管理 → Human Resources Management
+系统管理 → System Administration
+其他 → Others
